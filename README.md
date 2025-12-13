@@ -179,13 +179,3 @@ This project successfully demonstrates an end-to-end sentiment analysis system u
 M.S. in Computer Science
 University of Florida
 
----
-
-If you want, I can also:
-
-* ✨ Shorten this for **assignment submission**
-* ✨ Rewrite for **GitHub recruiters**
-* ✨ Add **model metrics table**
-* ✨ Help you write a **project report / conclusion slide**
-
-Just tell me 👍
