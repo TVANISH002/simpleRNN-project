@@ -1,4 +1,3 @@
-# simpleRNN-project
 
 # 🎬 IMDB Sentiment Analysis using Simple RNN
 
