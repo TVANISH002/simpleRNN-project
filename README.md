@@ -1,11 +1,5 @@
 # simpleRNN-project
 
-Perfect 👍
-Below is a **complete, clean, professional `README.md` file** that you can **copy-paste directly** into your GitHub repository.
-It clearly explains **why you used SimpleRNN**, **what works**, and **why negative reviews struggle** — in a way that **evaluators, professors, and recruiters will respect**.
-
----
-
 # 🎬 IMDB Sentiment Analysis using Simple RNN
 
 ## 📌 Project Overview
