@@ -17,19 +17,6 @@ The primary goal is to understand how basic RNN architectures handle sequential 
 
 ---
 
-## 📂 Project Structure
-
-```
-IMDB-Sentiment-Analysis/
-│
-├── app.py                  # Streamlit application
-├── simple_rnn_imdb.keras   # Trained SimpleRNN model
-├── requirements.txt        # Project dependencies
-├── README.md               # Project documentation
-```
-
----
-
 ## 📊 Dataset
 
 * **Dataset**: IMDB Movie Reviews (Keras built-in dataset)
