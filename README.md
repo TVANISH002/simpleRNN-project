@@ -1,161 +1,134 @@
-
-# 🎬 IMDB Sentiment Analysis using Simple RNN
-
-## 📌 Project Overview
-
-This project implements an **end-to-end Deep Learning sentiment analysis system** using a **Simple Recurrent Neural Network (SimpleRNN)** on the IMDB movie reviews dataset.
-The primary goal is to understand how basic RNN architectures handle sequential text data and to analyze their strengths and limitations in real-world NLP tasks.
+## 🎬 IMDB Sentiment Analysis using Simple RNN
+Deep learning NLP project focused on understanding how basic recurrent neural networks
+handle real-world text data — including where and why they fail.
 
 ---
 
-## 🎯 Objective
+### Why this project
+Most sentiment analysis projects jump directly to LSTM or GRU models and report accuracy.
+This project intentionally takes a **different approach**.
 
-* Build a complete NLP pipeline: **data loading → preprocessing → model training → inference**
-* Use **SimpleRNN** intentionally (not LSTM/GRU) for educational purposes
-* Observe how SimpleRNN behaves on **positive vs negative sentiment**
-* Deploy the trained model for real-time predictions using **Streamlit**
+The goal is to:
+- Build an end-to-end NLP pipeline using a **SimpleRNN**
+- Observe its behavior on real movie reviews
+- Analyze strengths, failure modes, and architectural limitations
 
----
-
-## 📊 Dataset
-
-* **Dataset**: IMDB Movie Reviews (Keras built-in dataset)
-* **Total samples**: 50,000 reviews
-
-  * 25,000 training
-  * 25,000 testing
-* **Task**: Binary sentiment classification
-
-  * `1` → Positive
-  * `0` → Negative
-* **Vocabulary size**: Top 10,000 most frequent words
+This project emphasizes **model understanding and error analysis**, not just performance.
 
 ---
 
-## 🧠 Model Architecture (SimpleRNN)
-
-```text
-Embedding Layer (128 dimensions)
-↓
-SimpleRNN (128 units, tanh activation)
-↓
-Dropout (0.5)
-↓
-Dense (Sigmoid)
-```
-
-### Why SimpleRNN?
-
-The model deliberately uses **SimpleRNN** to:
-
-* Understand basic sequence modeling
-* Highlight vanishing gradient issues
-* Compare against more advanced RNN variants in future work
+### Objective
+- Build a complete NLP workflow: preprocessing → training → inference  
+- Use SimpleRNN deliberately (instead of LSTM/GRU) for educational insight  
+- Study differences in model behavior on positive vs negative sentiment  
+- Deploy the trained model using Streamlit for real-time predictions  
 
 ---
 
-## ⚙️ Training Details
-
-* **Loss function**: Binary Crossentropy
-* **Optimizer**: Adam (learning rate = 0.0003)
-* **Batch size**: 32
-* **Sequence length**: 100 tokens
-* **EarlyStopping**:
-
-  * Monitored on validation accuracy
-  * Prevents overfitting
-  * Restores best model weights
-
----
-
-## ✅ Observed Strengths
-
-The SimpleRNN model performs **well on positive sentiment**, especially when reviews contain strong positive keywords.
-
-### Examples:
-
-```
-"Absolutely loved it" → Positive (0.986)
-"👌👌👌 masterpiece" → Positive (0.990)
-"This movie was fantastic" → Positive (0.908)
-```
-
-This indicates the model successfully learns **short-term word-level sentiment patterns**.
+### Dataset
+- Dataset: IMDB Movie Reviews (Keras built-in dataset)
+- Total samples: 50,000  
+  - 25,000 training  
+  - 25,000 testing  
+- Task: Binary sentiment classification  
+  - `1` → Positive  
+  - `0` → Negative  
+- Vocabulary size: Top 10,000 most frequent words  
+- Sequence length: 100 tokens  
 
 ---
 
-## ⚠️ Observed Limitations
+### Model architecture (SimpleRNN)
+- Embedding layer (128 dimensions)  
+- SimpleRNN layer (128 units, `tanh` activation)  
+- Dropout (0.5)  
+- Dense output layer (`sigmoid`)  
 
-The model **struggles with negative sentiment**, particularly in cases involving:
-
-* Negation (e.g., *"not good", "doesn't look nice"*)
-* Strong negative expressions
-* Slang and informal language
-* Sarcasm or contextual meaning
-
-### Examples:
-
-```
-"This movie is bad and it doesn't look nice" → Positive (0.908)
-"Worst film ever!!!" → Positive (0.709)
-```
+**Why SimpleRNN?**
+- To understand basic sequence modeling  
+- To highlight vanishing gradient issues  
+- To establish a baseline for future comparison with LSTM/GRU models  
 
 ---
 
-## 🔍 Technical Explanation of Limitations
-
-SimpleRNN uses a **single hidden state**, which makes it difficult to:
-
-* Retain long-term dependencies
-* Handle negation effectively
-* Capture sentence-level semantics
-
-As sequences grow longer, earlier information fades due to the **vanishing gradient problem**, causing the model to rely more on isolated word presence than full contextual meaning.
-
-This behavior is **expected and well-documented** in NLP research.
+### Training details
+- Loss function: Binary Crossentropy  
+- Optimizer: Adam (learning rate = 0.0003)  
+- Batch size: 32  
+- EarlyStopping:
+  - Monitored on validation accuracy  
+  - Restores best model weights  
 
 ---
 
-## 🎓 Educational Value
+### Observed strengths
+The model performs well on **short, strongly positive reviews**, where sentiment is
+clearly indicated by local keywords.
 
-This project serves as a **learning-focused implementation** that:
+**Examples:**
+- “Absolutely loved it” → Positive (0.986)  
+- “👌👌👌 masterpiece” → Positive (0.990)  
+- “This movie was fantastic” → Positive (0.908)  
 
-* Demonstrates the full NLP deep learning workflow
-* Highlights architectural limitations of SimpleRNN
-* Provides a strong baseline for comparison with LSTM/GRU models
-
----
-
-## 🚀 Future Improvements
-
-Potential enhancements include:
-
-* Replacing SimpleRNN with **LSTM or GRU**
-* Using **Bidirectional RNNs**
-* Adding **pretrained embeddings** (GloVe, Word2Vec)
-* Preserving punctuation and emojis for richer sentiment cues
-* Performing threshold calibration for class imbalance
+This indicates the model successfully captures **short-term word-level sentiment cues**.
 
 ---
 
-## 🧪 Deployment
+### Observed limitations
+The model struggles with **negative and context-dependent sentiment**, especially when:
+- Negation is involved (e.g., “not good”, “doesn’t look nice”)  
+- Reviews are longer or more descriptive  
+- Sarcasm or informal language appears  
 
-The model is deployed using **Streamlit**, allowing users to input any movie review and receive:
-
-* Sentiment classification (Positive / Negative)
-* Prediction confidence score
-
----
-
-## 📌 Conclusion
-
-This project successfully demonstrates an end-to-end sentiment analysis system using SimpleRNN. While the model performs reliably for positive sentiment detection, its difficulty in handling negative and context-dependent sentiment highlights the inherent limitations of basic RNN architectures. These findings reinforce the motivation for using more advanced recurrent models in real-world NLP applications.
+**Examples:**
+- “This movie is bad and it doesn’t look nice” → Positive (0.908)  
+- “Worst film ever!!!” → Positive (0.709)  
 
 ---
 
-## 👤 Author
+### Technical explanation
+SimpleRNN maintains a single hidden state, which makes it difficult to:
+- Retain long-term dependencies  
+- Handle negation effectively  
+- Capture sentence-level semantics  
 
-**Anish Tirumala Venkata**
-M.S. in Computer Science
-University of Florida
+As sequences grow longer, early information fades due to the
+**vanishing gradient problem**, causing the model to rely on isolated word presence
+rather than full contextual meaning.
 
+This behavior is expected and well-documented in NLP research.
+
+---
+
+### Educational value
+This project:
+- Demonstrates a full NLP deep learning pipeline  
+- Highlights real architectural limitations of SimpleRNN  
+- Provides a clear baseline for more advanced recurrent models  
+- Emphasizes diagnosis and reasoning over raw accuracy  
+
+---
+
+### Future improvements
+- Replace SimpleRNN with LSTM or GRU  
+- Use Bidirectional RNNs for richer context  
+- Add pretrained embeddings (GloVe, Word2Vec)  
+- Preserve punctuation and emojis for sentiment cues  
+- Calibrate prediction thresholds for class imbalance  
+
+---
+
+### Deployment
+The model is deployed using **Streamlit**, allowing users to:
+- Enter any movie review  
+- Receive sentiment classification (Positive / Negative)  
+- View prediction confidence scores  
+
+---
+
+### Conclusion
+This project successfully demonstrates an end-to-end sentiment analysis system using
+SimpleRNN. While the model performs reliably for positive sentiment detection, its
+difficulty in handling negation and long-range dependencies highlights the inherent
+limitations of basic RNN architectures and reinforces the motivation for using
+LSTM/GRU models in real-world NLP applications.
